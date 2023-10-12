@@ -15,20 +15,18 @@ let gameOver = true;
 
 document.addEventListener("mousedown", () => jump());
 
-
 function Main(): void {
   if (gameOver === false) {
     score = score + 1;
     SetText("Score: " + score);
 
     CheckGameOver();
-    
   }
 }
 
 function jump(): void {
   if (gameOver === false) {
-    if (isJumping == false) {
+    if (isJumping === false) {
       isJumping = true;
       dino?.classList.add("jump");
       setTimeout(RemoveJump, 500);
@@ -110,13 +108,19 @@ function SetText(s: string): void {
   }
 }
 
+let start: number | undefined = undefined;
+let speed = 0;
+let speedRate = 0.1;
+function tick(timeSpan: number) {
+  if (!start) start = timeSpan;
 
-
-function tick(){
-    
+  const diff = (timeSpan - start) / 1000;
+  if(diff >= speed){
     Main();
-    requestAnimationFrame(tick);
+    speed += speedRate;
+    start = timeSpan;
 
+  }
 }
 
 requestAnimationFrame(tick);
