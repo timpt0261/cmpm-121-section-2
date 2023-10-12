@@ -11,7 +11,7 @@ let score = 0
 SetText("click to start!")
 
 
-var isJumping = false
+let isJumping = false
 let gameOver = true
 
 document.addEventListener('click', () => jump())
@@ -19,7 +19,8 @@ document.addEventListener('click', () => jump())
 
 setInterval(function () { Main()}, 10)
 
-function Main()
+
+function Main(): void
 {
     if(gameOver == false)
     {
@@ -31,7 +32,7 @@ function Main()
 }
 
 
-function jump()
+function jump(): void
 {
     if(gameOver === false)
     {
@@ -50,33 +51,33 @@ function jump()
 }
 
 
-function RemoveJump()
+function RemoveJump(): void
 {
     dino?.classList.remove("jump")
     isJumping = false;
     //mainLoop = mainLoop //bug fix?
 }
 
-function RemoveObstacles()
+function RemoveObstacles(): void
 {
     cactus?.classList.remove("cactusMove")
     bird?.classList.remove("birdMove")
 }
 
 
-function CheckGameOver()
+function CheckGameOver() : void
 {
 
     if(gameOver == false && dino != null && cactus != null && bird != null)
     {
         //get is dinosaur jumping
-        let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"))
+        const dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"))
 
         //get cactus position
-        let cactusleft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"))
+        const cactusleft = parseInt(window.getComputedStyle(cactus).getPropertyValue("left"))
 
         //get bird position
-        let birdleft = parseInt(window.getComputedStyle(bird).getPropertyValue("left"))
+        const birdleft = parseInt(window.getComputedStyle(bird).getPropertyValue("left"))
 
         //detect cactus collision
         if(dinoTop >= 150 && Math.abs(cactusleft) < 7)
@@ -111,7 +112,7 @@ function CheckGameOver()
 }
 
 
-function StartGame()
+function StartGame() : void
 {
     console.log("Game started!")
     gameOver = false
@@ -120,7 +121,7 @@ function StartGame()
     bird?.classList.add("birdMove")
 }
 
-function SetText(s: string)
+function SetText(s: string) : void
 {
     if(scoreText)
     {
